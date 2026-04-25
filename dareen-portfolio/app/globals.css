@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:      #0a0a0f;
+  --bg2:     #111118;
+  --bg3:     #1a1a24;
+  --text:    #e8e8f0;
+  --muted:   #8888a0;
+  --accent:  #7c6cfa;
+  --accent2: #3dd6ac;
+  --accent3: #fa8c6c;
+  --border:  rgba(255, 255, 255, 0.08);
+  --mono:    var(--font-mono), 'Space Mono', monospace;
+  --sans:    var(--font-sans), 'DM Sans', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+a,
+button,
+[data-cursor] {
+  cursor: none;
+}
+
+/* Scanline overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.025) 2px,
+    rgba(0, 0, 0, 0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.8); }
+}
+
+.blink      { animation: blink 1s step-end infinite; }
+.pulse-dot  { animation: pulse-dot 2s infinite; }
+
+/* Selection */
+::selection {
+  background: rgba(124, 108, 250, 0.3);
+  color: var(--text);
+}
